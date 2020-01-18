@@ -43,10 +43,7 @@ public class Player : Entity
         {
             float posX = Mathf.Cos(angle * i) * _fireIndecatorRadius;
             float posY = Mathf.Sin(angle * i) * _fireIndecatorRadius;
-
-            GameObject current;
-            _fireIndecators.Add(current =  Instantiate(_fireIndecator, new Vector3(posX, posY,0), Quaternion.identity) as GameObject);
-            current.transform.SetParent(gameObject.transform);
+            _fireIndecators.Add(Instantiate(_fireIndecator, new Vector3(posX, posY,0), Quaternion.identity) as GameObject);
         }
     }
 
@@ -54,9 +51,18 @@ public class Player : Entity
 
     private void FixedUpdate() 
     {
+        float angle = 360 / (_fireIndecatorCount - 1);
         float posX = Mathf.Cos(arrowAngle) * _fireIndecatorRadius;
         float posY = Mathf.Sin(arrowAngle) * _fireIndecatorRadius;
+        
         _arrowFireIndecator.transform.position = new Vector3(gameObject.transform.position.x + posX, gameObject.transform.position.y + posY, 0);
+
+        for (int i = 0; i < _fireIndecatorCount; i++)
+        {
+            posX = Mathf.Cos(angle * i) * _fireIndecatorRadius;
+            posY = Mathf.Sin(angle * i) * _fireIndecatorRadius;
+            _fireIndecators[i].transform.position = new Vector3(gameObject.transform.position.x + posX, gameObject.transform.position.y + posY, 0);
+        }
 
         if (arrowAngle > 360)
         {
