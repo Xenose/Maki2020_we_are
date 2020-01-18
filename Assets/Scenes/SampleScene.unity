@@ -222,6 +222,7 @@ MonoBehaviour:
     type: 3}
   _fireIndecatorCount: 3
   _fireIndecatorRadius: 3
+  _fireIndecatorRotationOffset: 0
 --- !u!212 &299684148
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class Player : Entity
     uint _fireIndecatorCount = 3;
     [SerializeField]
     uint _fireIndecatorRadius = 0;
+    [SerializeField]
+    uint _fireIndecatorRotationOffset = 0;
 
     Vector2 _fireDir = Vector2.zero;
     List<GameObject> _fireIndecators = new List<GameObject>();
@@ -34,16 +36,18 @@ public class Player : Entity
         base.Awake();
         _cam = Camera.main;
 
-        float angle = 360 / (_fireIndecatorCount - 1);
+        float angle = (360 / _fireIndecatorCount) + _fireIndecatorRotationOffset;
 
         _arrowFireIndecator =  Instantiate(_fireIndecator, new Vector3(0,0,0), Quaternion.identity) as GameObject;
         _arrowFireIndecator.transform.SetParent(gameObject.transform);
 
         for (int i = 0; i < _fireIndecatorCount; i++)
         {
-            float posX = Mathf.Cos(angle * i) * _fireIndecatorRadius;
-            float posY = Mathf.Sin(angle * i) * _fireIndecatorRadius;
+            float posX = XenMath.AngleX(angle * i, _fireIndecatorRadius);
+            float posY = XenMath.AngleY(angle * i, _fireIndecatorRadius);
             _fireIndecators.Add(Instantiate(_fireIndecator, new Vector3(posX, posY,0), Quaternion.identity) as GameObject);
+
+            Debug.Log(angle * i);
         }
     }
 
@@ -52,15 +56,6 @@ public class Player : Entity
     private void FixedUpdate() 
     {
         UpdateFireIndecators();
-
-        if (arrowAngle > 360)
-        {
-            arrowAngle = 0;
-        }
-        else
-        {
-            arrowAngle += 0.01f;
-        }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -140,17 +135,29 @@ public class Player : Entity
 
     void UpdateFireIndecators()
     {
-        float angle = 360 / (_fireIndecatorCount - 1);
+        float angle = (360 / _fireIndecatorCount);
         float posX = Mathf.Cos(arrowAngle) * _fireIndecatorRadius;
         float posY = Mathf.Sin(arrowAngle) * _fireIndecatorRadius;
 
-        _arrowFireIndecator.transform.position = new Vector3(gameObject.transform.position.x + posX, gameObject.transform.position.y + posY, 0);
+        _arrowFireIndecator.transform.position = new Vector3(
+            gameObject.transform.position.x + posX, 
+            gameObject.transform.position.y + posY, 
+            0);
 
         for (int i = 0; i < _fireIndecatorCount; i++)
         {
-            posX = Mathf.Cos(angle * i) * _fireIndecatorRadius;
-            posY = Mathf.Sin(angle * i) * _fireIndecatorRadius;
+            posX = XenMath.AngleX(angle * i  + _fireIndecatorRotationOffset, _fireIndecatorRadius);
+            posY = XenMath.AngleY(angle * i  + _fireIndecatorRotationOffset, _fireIndecatorRadius);
             _fireIndecators[i].transform.position = new Vector3(gameObject.transform.position.x + posX, gameObject.transform.position.y + posY, 0);
+        }
+
+        if (arrowAngle > 360)
+        {
+            arrowAngle = 0;
+        }
+        else
+        {
+            arrowAngle += 0.01f;
         }
     }
 }
