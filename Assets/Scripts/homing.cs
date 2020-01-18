@@ -8,7 +8,7 @@ public class homing : MonoBehaviour {
 	// Speed in units per sec.
 	public float speed;
 
-	void Update( ) {
+	void FixedUpdate( ) {
 		// The step size is equal to speed times frame time.
 		float step = speed * Time.deltaTime;
 
