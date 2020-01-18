@@ -130,12 +130,12 @@ MonoBehaviour:
   _speed: 5
   _colliderType: 1
   cameraPosition: {x: 0, y: 0, z: -10}
-  _bulletPref: {fileID: 9083535556223914016, guid: 6db5dd4d6a50c01428b3530a8c24b5e5,
+  _bulletPref: {fileID: 599897879597559252, guid: 6daa96e5a09933f41bc952ed646cc205,
     type: 3}
-  _fireIndecator: {fileID: 9083535556223914016, guid: 6db5dd4d6a50c01428b3530a8c24b5e5,
+  _fireIndecator: {fileID: 599897879597559252, guid: 6daa96e5a09933f41bc952ed646cc205,
     type: 3}
   _fireIndecatorCount: 3
-  _fireIndecatorRadius: 0
+  _fireIndecatorRadius: 1
   _fireIndecatorRotationOffset: 0
 --- !u!212 &3578999152609835611
 SpriteRenderer:
