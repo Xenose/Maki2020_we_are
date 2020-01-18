@@ -30,11 +30,15 @@ public class Player : Entity
     Vector2 _fireDir = Vector2.zero;
     List<GameObject> _fireIndecators = new List<GameObject>();
     GameObject _arrowFireIndecator;
+    
+    float arrowAngle = 0;
 
     private void Awake() 
     {
         base.Awake();
         _cam = Camera.main;
+
+        _body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         float angle = (360 / _fireIndecatorCount) + _fireIndecatorRotationOffset;
 
@@ -46,12 +50,8 @@ public class Player : Entity
             float posX = XenMath.AngleX(angle * i, _fireIndecatorRadius);
             float posY = XenMath.AngleY(angle * i, _fireIndecatorRadius);
             _fireIndecators.Add(Instantiate(_fireIndecator, new Vector3(posX, posY,0), Quaternion.identity) as GameObject);
-
-            Debug.Log(angle * i);
         }
     }
-
-    float arrowAngle = 0;
 
     private void FixedUpdate() 
     {

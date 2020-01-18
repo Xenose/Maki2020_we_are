@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 870816954020512131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8007433, y: -0.15425363, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
   - {fileID: 5466795580002479463}
   m_Father: {fileID: 0}
@@ -128,6 +128,7 @@ MonoBehaviour:
   _state: 0
   _hp: 100
   _speed: 5
+  _speedLimit: 5
   _colliderType: 1
   cameraPosition: {x: 0, y: 0, z: -10}
   _bulletPref: {fileID: 599897879597559252, guid: 6daa96e5a09933f41bc952ed646cc205,

@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    [SerializeField] GameObject bullet;
+    [SerializeField] 
+    GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("Shot");
+        //StartCoroutine("Shot");
     }
 
-    // Update is called once per frame
-    void Update()
+    ////// slow as fuck fix it!!!
+    /*IEnumerator Shot()
     {
-
-    }
-
-    IEnumerator Shot(){
-
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
             Instantiate(bullet, transform);
         }
-    }
+    }*/
 
 }
