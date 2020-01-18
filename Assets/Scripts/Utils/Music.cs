@@ -9,6 +9,8 @@ public class Music : MonoBehaviour
     [SerializeField] 
     public bool _random = false;
     [SerializeField] 
+    public bool _mutte = false;
+    [SerializeField] 
     private uint _trakNr = 0;
     [SerializeField] 
     private AudioClip[] _playList;
@@ -20,13 +22,17 @@ public class Music : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!_audioOut.isPlaying)
+        if (!_audioOut.isPlaying && !_mutte)
         {
             if (_playList.Length <= _trakNr)
                 _trakNr = 0;
 
             _audioOut.clip = _playList[_trakNr++];
             _audioOut.Play(1);
+        }
+        else if (_mutte && _audioOut.isPlaying)
+        {
+            _audioOut.Stop();
         }
     }
 }
