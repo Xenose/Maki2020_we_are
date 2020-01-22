@@ -28,6 +28,8 @@ public class Entity : MonoBehaviour
     [SerializeField]
     protected float _speed = 5.0f;
     [SerializeField]
+    protected float _speedLimit = 5.0f;
+    [SerializeField]
     protected ColliderType _colliderType = ColliderType.BOX;
 
     public virtual void Awake() 
@@ -98,14 +100,13 @@ public class Entity : MonoBehaviour
                 _anime.SetBool("Running", false);
         }
 
-        if (_body.velocity.x < 0.3)
-        {
-            gameObject.transform.localScale = new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-        }
-
-        if (_body.velocity.x > -0.3)
+        if (_body.velocity.x < 0.1)
         {
             gameObject.transform.localScale = new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        }
+        else if (Mathf.Abs(_body.velocity.x) < 0.1)
+        {
+            gameObject.transform.localScale = new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
     }
 }

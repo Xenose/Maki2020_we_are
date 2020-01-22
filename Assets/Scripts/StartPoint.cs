@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class StartPoint : MonoBehaviour
 {
-
-	[SerializeField] GameObject player;
+	[SerializeField] 
+    GameObject player;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Instantiate(player, this.transform.position, Quaternion.identity);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
