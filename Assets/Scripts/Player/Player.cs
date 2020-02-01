@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Entity
 {
@@ -159,5 +160,10 @@ public class Player : Entity
         {
             arrowAngle += 0.01f;
         }
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.LoadScene("title");
     }
 }
