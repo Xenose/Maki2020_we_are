@@ -41,7 +41,7 @@ public class Player : Entity
 
         _body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        float angle = (360 / _fireIndecatorCount) + _fireIndecatorRotationOffset;
+        /*float angle = (360 / _fireIndecatorCount) + _fireIndecatorRotationOffset;
 
         _arrowFireIndecator =  Instantiate(_fireIndecator, new Vector3(0,0,0), Quaternion.identity) as GameObject;
         _arrowFireIndecator.transform.SetParent(gameObject.transform);
@@ -51,7 +51,7 @@ public class Player : Entity
             float posX = XenMath.AngleX(angle * i, _fireIndecatorRadius);
             float posY = XenMath.AngleY(angle * i, _fireIndecatorRadius);
             _fireIndecators.Add(Instantiate(_fireIndecator, new Vector3(posX, posY,0), Quaternion.identity) as GameObject);
-        }
+        }*/
     }
 
     private void FixedUpdate() 
@@ -75,10 +75,23 @@ public class Player : Entity
             {
                 float length = Input.mousePosition.y + Input.mousePosition.x;
                 Jump(new Vector2(
-                    ((-(Input.mousePosition.x - _mouseLastX)) / length), 
-                    (-(Input.mousePosition.y - _mouseLastY)) / length));
+                    (-((Input.mousePosition.x - _mouseLastX) / length)), 
+                    (-((Input.mousePosition.y - _mouseLastY) / length))));
             }
-            else if (_fireMode)
+            else
+            {
+                GameObject _bullet = Instantiate(_bulletPref);
+                Bullet tmp = _bullet.AddComponent<Bullet>();
+
+                tmp.Fire(
+                    gameObject.transform.position, 
+                    new Vector2(
+                        Input.mousePosition.x, 
+                        Input.mousePosition.y - Screen.height / 2 - cameraPosition.y), 
+                        6.0f);
+            }
+
+            /*else if (_fireMode)
             {  
                 _fireMode = false;
 
@@ -105,7 +118,7 @@ public class Player : Entity
                     RigidbodyConstraints2D.FreezePositionX |
                     RigidbodyConstraints2D.FreezePositionY |
                     RigidbodyConstraints2D.FreezeRotation;
-            }
+            }*/
         }
 
         /*if (Input.GetButton("Fire1"))
@@ -136,7 +149,7 @@ public class Player : Entity
 
     void UpdateFireIndecators()
     {
-        float angle = (360 / _fireIndecatorCount);
+        /*float angle = (360 / _fireIndecatorCount);
         float posX = Mathf.Cos(arrowAngle) * _fireIndecatorRadius;
         float posY = Mathf.Sin(arrowAngle) * _fireIndecatorRadius;
 
@@ -159,7 +172,7 @@ public class Player : Entity
         else
         {
             arrowAngle += 0.01f;
-        }
+        }*/
     }
 
     void OnDestroy()
