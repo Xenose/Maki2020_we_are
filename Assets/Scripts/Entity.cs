@@ -90,14 +90,18 @@ public class Entity : MonoBehaviour
             _state = State.WALKING;
 
             if (null != _anime)
+            {
                 _anime.SetBool("Running", true);
+            }
         }
         else
         {
             _state = State.IDLE;
             
             if (null != _anime)
+            {
                 _anime.SetBool("Running", false);
+            }
         }
 
         if (_body.velocity.x < 0.1)
